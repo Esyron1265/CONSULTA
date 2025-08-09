@@ -77,11 +77,17 @@ with tab2:
         st.dataframe(resultados)
 
         # Descargar resultados
+        output = io.BytesIO()
+        resultados.to_excel(output, index=False)
+        output.seek(0)
+
         st.download_button(
             "⬇ Descargar resultados",
-            data=resultados.to_excel(index=False),
-            file_name="resultados.xlsx"
+            data=output,
+            file_name="resultados.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
     else:
         st.warning("La base unificada está vacía. Sube archivos en la pestaña anterior.")
+
 
