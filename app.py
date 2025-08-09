@@ -3,11 +3,20 @@ import pandas as pd
 import os
 
 # === Configuración inicial ===
-st.set_page_config(page_title="Gestor de Base de Datos", layout="wide")
+st.set_page_config(page_title="Gestor de Base Unificada", layout="wide")
 st.title("📋 Gestor de Base Unificada")
 
 BASE_FILE = "base_unificada.xlsx"
-COLUMNAS_ESTANDAR = ["Número", "Nombre", "Dirección", "CUPS"]
+COLUMNAS_ESTANDAR = [
+    "DNI",
+    "NOMBRE",
+    "TELEFONO",
+    "DIRECCION",
+    "CUPS LUZ",
+    "CUPS GAS",
+    "IBAN",
+    "CORREO ELECTRONICO"
+]
 
 # === Función para cargar base existente ===
 def cargar_base():
@@ -68,6 +77,11 @@ with tab2:
         st.dataframe(resultados)
 
         # Descargar resultados
-        st.download_button("⬇ Descargar resultados", data=resultados.to_excel(index=False), file_name="resultados.xlsx")
+        st.download_button(
+            "⬇ Descargar resultados",
+            data=resultados.to_excel(index=False),
+            file_name="resultados.xlsx"
+        )
     else:
         st.warning("La base unificada está vacía. Sube archivos en la pestaña anterior.")
+
